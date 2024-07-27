@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Shoe from "../../interfaces/ShoeInterface";
 import {
   ParamListBase,
@@ -14,6 +14,8 @@ import {
 } from "@expo/vector-icons";
 import theme from "../../utils/theme";
 import { scale, verticalScale } from "../../utils/dynamicScaling";
+import { CartState, useCartStore } from "../../states/GlobalState";
+import CartListModal from "../../components/CartListModal";
 
 type ShoeDetailRouteProp = RouteProp<ParamListBase, "ShoeDetail">;
 
@@ -22,9 +24,30 @@ const ShoeDetail = ({ route }: { route: ShoeDetailRouteProp }) => {
   const navigation = useNavigation();
 
   const [selectedSize, setSelectedSize] = useState<number>(shoe.size[0]);
+  const [alreadyInCart, setAlreadyInCart] = useState<boolean>(false);
 
   const handleSizeSelection = (size: number) => {
     setSelectedSize(size);
+  };
+
+  const globalState: CartState = useCartStore() as CartState;
+
+  const handleAddToCart = () => {
+    // globalState.addToCart(shoe);
+    // globalState.toggleCartModal();
+
+    // Check if the shoe is already in the cart and update the state
+    const isAlreadyInCart = globalState.cartItems.some(
+      (item) => item.id === shoe.id
+    );
+    setAlreadyInCart(isAlreadyInCart);
+
+    // If the shoe is not in the cart, add it
+    if (!isAlreadyInCart) {
+      globalState.addToCart(shoe);
+    }
+
+    globalState.toggleCartModal();
   };
 
   return (
@@ -115,7 +138,10 @@ const ShoeDetail = ({ route }: { route: ShoeDetailRouteProp }) => {
       </View>
 
       <View style={styles.actionButtonsContainer}>
-        <TouchableOpacity style={styles.cartContainer}>
+        <TouchableOpacity
+          style={styles.cartContainer}
+          onPress={handleAddToCart}
+        >
           <FontAwesome5
             name="shopping-cart"
             size={24}
@@ -127,6 +153,7 @@ const ShoeDetail = ({ route }: { route: ShoeDetailRouteProp }) => {
           <Text style={styles.buyText}>Comprar Ahora</Text>
         </TouchableOpacity>
       </View>
+      <CartListModal />
     </View>
   );
 };
