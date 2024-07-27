@@ -33,7 +33,7 @@ export interface CartState {
 
 const cartStore = (set: any) => ({
   cartItems: [],
-  isCartModalVisible: true,
+  isCartModalVisible: false,
   addToCart: (shoe: Shoe) =>
     set((state: CartState) => ({ cartItems: [...state.cartItems, shoe] })),
   removeFromCart: (shoe: Shoe) =>

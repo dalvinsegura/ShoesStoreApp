@@ -11,7 +11,9 @@ const CartListItem = ({ item }: { item: Shoe }) => {
   return (
     <View style={styles.cartItem}>
       <Image
-        source={require("../assets/shoes/adidas_ultraboost_mid.png")}
+        source={{
+          uri: item.image_url,
+        }}
         style={styles.itemImage}
       />
       <View

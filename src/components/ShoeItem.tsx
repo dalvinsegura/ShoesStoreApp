@@ -14,8 +14,6 @@ const ShoeItem = ({
   shoe: Shoe;
   navigation: NavigationProp<any>;
 }) => {
-  const image = shoe.image_url;
-
   // console.log("shoe", shoe);
 
   const handleNavigation = () => {
@@ -27,7 +25,9 @@ const ShoeItem = ({
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require("../assets/shoes/adidas_ultraboost_mid.png")}
+          source={{
+            uri: shoe.image_url,
+          }}
         />
       </View>
       <Text style={styles.nameText} numberOfLines={1} adjustsFontSizeToFit>

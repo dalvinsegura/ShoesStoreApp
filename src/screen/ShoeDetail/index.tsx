@@ -64,7 +64,9 @@ const ShoeDetail = ({ route }: { route: ShoeDetailRouteProp }) => {
 
       <View style={styles.imageContainer}>
         <Image
-          source={require("../../assets/shoes/adidas_ultraboost_mid.png")}
+          source={{
+            uri: shoe.image_url,
+          }}
           style={styles.shoeImage}
         />
       </View>

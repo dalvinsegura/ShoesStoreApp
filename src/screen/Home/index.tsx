@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, View, FlatList, Image } from "react-native";
 import React from "react";
 import Header from "./components/Header";
 import { scale, verticalScale } from "../../utils/dynamicScaling";
@@ -16,7 +16,8 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <Header />
         <SearchBar />
-        <View
+        <Image
+          source={require("../../assets/flayer.png")}
           style={{
             width: "100%",
             height: verticalScale(200),
