@@ -3,7 +3,8 @@ enum MainNavigatorRoutes {
     Home = 'Home',
     Shoes = 'Shoes',
     ShoeDetail = 'ShoeDetail',
-    Cart = 'Cart'
+    Cart = 'Cart',
+    Settings = 'Settings'
 }
 
 export default MainNavigatorRoutes;

@@ -7,8 +7,16 @@ import {
   verticalScale,
 } from "../../../utils/dynamicScaling";
 import theme from "../../../utils/theme";
+import { useNavigation } from "@react-navigation/native";
+import MainNavigatorRoutes from "../../../enums/MainNavigatorRoutes";
 
 const Header = () => {
+  const navigation = useNavigation<any>();
+
+  const handleSettingsPress = () => {
+    navigation.navigate(MainNavigatorRoutes.Settings);
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -31,6 +39,7 @@ const Header = () => {
 
         <TouchableOpacity
           style={{ ...styles.buttonContainer, marginLeft: scale(20) }}
+          onPress={handleSettingsPress}
         >
           <Feather
             name="settings"
