@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import theme from "../../utils/theme";
 import {
   moderateScale,
@@ -14,55 +14,21 @@ import {
   verticalScale,
 } from "../../utils/dynamicScaling";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import authRepository from "../../repositories/authRepository";
 
-const LoginScreen = () => {
-  const navigation = useNavigation<any>();
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleNavigateSignup = () => {
-    navigation.navigate("Signup");
-  };
-
-  const handleLogin = async () => {
-    const result = await authRepository.signInWithEmailAndPassword(
-      credentials.email,
-      credentials.password
-    );
-
-    console.log("Result: ", result);
-  };
-
+const SignupScreen = () => {
   return (
     <View style={styles.container}>
       <Image
         style={styles.backgroundImg}
         source={require("../../assets/background-1.jpg")}
       />
-      <Text style={styles.title}>Inicia sesión</Text>
+      <Text style={styles.title}>Crea tu cuenta</Text>
       <Text style={styles.subtitle}>Ingresa tus datos para continuar</Text>
 
       <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Correo electrónico"
-          value={credentials.email}
-          onChangeText={(e) => {
-            setCredentials({ ...credentials, email: e });
-          }}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          value={credentials.password}
-          onChangeText={(e) => {
-            setCredentials({ ...credentials, password: e });
-          }}
-        />
+        <TextInput style={styles.input} placeholder="Nombre" />
+        <TextInput style={styles.input} placeholder="Correo electrónico" />
+        <TextInput style={styles.input} placeholder="Contraseña" />
         <View
           style={{
             flexDirection: "row",
@@ -74,8 +40,8 @@ const LoginScreen = () => {
           <Feather name="alert-triangle" size={20} color="red" />
           <Text style={styles.errorText}>Correo o contraseña incorrectos</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Iniciar sesión</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Crear cuenta</Text>
         </TouchableOpacity>
       </View>
 
@@ -87,7 +53,7 @@ const LoginScreen = () => {
         }}
       >
         <Text style={{ color: theme.colors.gray }}>¿No tienes una cuenta?</Text>
-        <TouchableOpacity onPress={handleNavigateSignup}>
+        <TouchableOpacity>
           <Text
             style={{
               color: theme.colors.black,
@@ -103,7 +69,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
   container: {
